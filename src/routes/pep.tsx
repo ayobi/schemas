@@ -30,7 +30,8 @@ const TemplateList = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = async (selectedOption: any) => {
     try {
-      const response = await fetch(selectedOption.url);
+      const fullUrl = `https://schema.databio.org/${selectedOption.url}`;
+      const response = await fetch(fullUrl);
       const yamlContent = await response.text();
       const parsedYaml = jsYaml.load(yamlContent) as YamlData;
       setYamlData(parsedYaml);
