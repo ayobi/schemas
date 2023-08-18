@@ -10,11 +10,11 @@ function App() {
   }
   
   const schemaOptions: SchemaOption[] = [
-    { value: '/bulker', label: 'Bulker' },
-    { value: '/pep', label: 'Pep' },
-    { value: '/pipelines', label: 'Pipelines' },
-    { value: '/refgenie', label: 'Refgenie' },
-    { value: '/refget', label: 'Refget' },
+    { value: '/bulker/', label: 'Bulker' },
+    { value: '/pep/', label: 'Pep' },
+    { value: '/pipelines/', label: 'Pipelines' },
+    { value: '/refgenie/', label: 'Refgenie' },
+    { value: '/refget/', label: 'Refget' },
   ];
 
   const navigate = useNavigate();

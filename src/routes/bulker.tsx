@@ -44,7 +44,7 @@ const TemplateList = () => {
   const [yamlTitleData, setYamlTitleData] = useState<YamlTitleData | null>(null);
 
   const loadDataFromHash = async (hash: string) => {
-    const selectedOption = options.find(option => `#${option.value}` === hash);
+    const selectedOption = options.find(option => `#/${option.value}` === hash);
     if (selectedOption) {
       try {
         const fullUrl = `https://schema.databio.org/${selectedOption.url}`;
