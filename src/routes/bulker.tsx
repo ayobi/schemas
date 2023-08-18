@@ -84,7 +84,7 @@ const TemplateList = () => {
       setYamlURLData(urlYaml);
       setYamlPathData(selectedOption.url);
       setYamlTitleData(selectedOption.label);
-      history(`#/${selectedOption.value}`);
+      history(`#${selectedOption.value}`);
     } catch (error) {
       console.error('Error loading YAML file:', error);
     }

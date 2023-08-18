@@ -10,12 +10,12 @@ import Refgenie from '../src/routes/refgenie'
 import Refget from '../src/routes/refget'
 
 const router = createHashRouter([
-  {path: '/', element: <App />},
-  {path: '/bulker/', element: <Bulker />},
-  {path: '/pep/', element: <Pep />},
-  {path: '/pipelines/', element: <Pipelines />},
-  {path: '/refgenie/', element: <Refgenie />},
-  {path: '/refget/', element: <Refget />},
+  {path: '/', element: <App />, },
+  {path: '/bulker', element: <Bulker />},
+  {path: '/pep', element: <Pep />},
+  {path: '/pipelines', element: <Pipelines />},
+  {path: '/refgenie', element: <Refgenie />},
+  {path: '/refget', element: <Refget />},
 ])
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
