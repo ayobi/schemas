@@ -6,6 +6,7 @@ import { coldarkCold } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Select from 'react-select';
 import { useNavigate, useLocation } from 'react-router-dom'; 
 import Button from 'react-bootstrap/Button';
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
 
 interface YamlData {
@@ -33,6 +34,8 @@ const options = Object.entries(data)
     url: value.url,
     description: value.description
   }));
+
+  console.log('Options:', options); 
 
 const TemplateList = () => {
   const history = useNavigate();
@@ -73,12 +76,16 @@ const TemplateList = () => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = async (selectedOption: any) => {
+    console.log('Selected Option:', selectedOption);
     try {
       const fullUrl = `https://schema.databio.org/${selectedOption.url}`;
       const response = await fetch(fullUrl);
       const yamlContent = await response.text();
+      console.log('YAML Content:', yamlContent);
       const parsedYaml = jsYaml.load(yamlContent) as YamlData;
+      console.log('Parsed YAML:', parsedYaml);
       const urlYaml = jsYaml.load(fullUrl) as YamlURLData;
+      console.log('URL YAML:', urlYaml);
       setYamlData(parsedYaml);
       setYamlDescData(selectedOption.description);
       setYamlURLData(urlYaml);
@@ -87,6 +94,7 @@ const TemplateList = () => {
       history(`#/${selectedOption.value}`);
     } catch (error) {
       console.error('Error loading YAML file:', error);
+      
     }
   };
 
@@ -99,8 +107,8 @@ const TemplateList = () => {
   return (
     <div>
       <div>
-        <h1>PEP Templates</h1>
-        <h3>Search below to find templates that belong to PEP</h3>
+        <h1>PEP schemas</h1>
+        <h3>Search below to find schemas that belong to PEP</h3>
       </div>
       <div>
         <Select
@@ -112,7 +120,14 @@ const TemplateList = () => {
       <div className="mt-3">
           {yamlString !== 'null' && ( 
             <>
-              <h2>{yamlTitleString}</h2>
+              <div className="fw-bold mt-2">
+                <Breadcrumb>
+                  <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+                  <Breadcrumb.Item href="https://ayobi.github.io/schemas/#/pep/">pep</Breadcrumb.Item>
+                  <Breadcrumb.Item active>{yamlTitleString}</Breadcrumb.Item>
+                </Breadcrumb>
+              </div>
+              <h2>Schema title: {yamlTitleString}</h2>
               <span className="label">Description: </span>{yamlDescString} <br />
               <span className="label">Relative Path: </span>{yamlPathString} <br />
               <span className="label">API Endpoint: </span>
@@ -127,7 +142,7 @@ const TemplateList = () => {
               >
                 <Button variant="success">Download Schema</Button>  
               </a>
-              
+              <h2>Schema content </h2>
               <SyntaxHighlighter language="yaml" style={coldarkCold} showLineNumbers={true}>
                 {yamlString}
               </SyntaxHighlighter>
